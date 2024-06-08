@@ -6,7 +6,8 @@ public class Metodos {
 	ArrayList<String> listaProductos = new ArrayList<>();
 	ArrayList<Integer> listaCantidad = new ArrayList<>();
 	
-	// Este es el metodo principal, me va a generar el menú y me va a llamar el metodo necesario para la petición del cliente
+	// Este es el metodo principal, me va a generar el menú y me va a llamar el metodo necesario para la petición del cliente.
+	// funciona bien.
 	
 	public void construirMenu () {
 		
@@ -27,16 +28,37 @@ public class Metodos {
 				agregarProducto();
 				break;
 			case 2:
-				buscarProducto();
+				if (listaProductos.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "No puedes seleccionar esta opción "
+							+ "sin haber registrado por lo menos un producto");
+				} else {
+					buscarProducto();
+				}
 				break;
 			case 3:
-				actualizarCantidadProducto();
+				if (listaProductos.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "No puedes seleccionar esta opción "
+							+ "sin haber registrado por lo menos un producto");
+				} else {
+					actualizarCantidadProducto();
+				}
 				break;
 			case 4:
-				eliminarProducto();
+				if (listaProductos.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "No puedes seleccionar esta opción "
+							+ "sin haber registrado por lo menos un producto");
+				} else {
+					eliminarProducto();
+				}
 				break;
 			case 5:
-				mostrarInventario();
+				if (listaProductos.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "No puedes seleccionar esta opción "
+							+ "sin haber registrado por lo menos un producto");
+				} else {
+					System.out.println("**********Inventario**********\n");
+					mostrarInventario();
+				}
 				break;
 			case 6:
 				JOptionPane.showMessageDialog(null, "Usted ha salido del programa");
@@ -71,8 +93,12 @@ public class Metodos {
 			}
 		}
 		System.out.println("Registro el producto de manera exitosa\n");
+		mostrarInventario();
 		
 	}
+	
+	// Este metodo permite buscar productos.
+	// problemas con la iteración, se muestra el mensaje el producto no existe varias veces...
 	
 	private void buscarProducto() {
 		
@@ -86,10 +112,12 @@ public class Metodos {
 			} else {
 				JOptionPane.showMessageDialog(null, "El producto " + producto + " no existe.");
 			}
-		}
+		}		
+		mostrarInventario();
 	}
 	
 	// Este metodo permite actualizar la cantidad de los productos.
+	// problemas con la iteración, se muestra el mensaje el producto no existe varias veces...
 	
 	private void actualizarCantidadProducto() {
 		
@@ -106,10 +134,12 @@ public class Metodos {
 				System.out.println("EL producto no existe\n");
 			}
 		}
+		mostrarInventario();
 		
 	}
 	
-	// Este metodo permite eliminar productos
+	// Este metodo permite eliminar productos.
+	// problemas con la iteración, se muestra el mensaje el producto no existe varias veces...
 	
 	private void eliminarProducto() {
 		
@@ -126,18 +156,19 @@ public class Metodos {
 				System.out.println("EL producto no existe\n");
 			}
 		}
-						
+		mostrarInventario();
+		
 	}
 	
-	// Este metodo permite ver el inventario actual
+	// Este metodo permite ver el inventario actual.
+	// Funciona bien.
 	
 	private void mostrarInventario() {
-		
-		System.out.println("**********Inventario**********\n");
 		
 		for (int i = 0; i < listaProductos.size(); i++) {
 			System.out.println("Producto: " + listaProductos.get(i) + ". Cantidad: " + listaCantidad.get(i));
 		}
+		System.out.println("");
 	}
 
 }
